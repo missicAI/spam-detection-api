@@ -1,4 +1,4 @@
-name: Python checks
+name: Kiem tra Python
 on: [push, pull_request]
 permissions:
   contents: read

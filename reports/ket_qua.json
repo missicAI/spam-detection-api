@@ -1,0 +1,28 @@
+{
+  "ngon_ngu": "Tiếng Việt",
+  "so_tin_goc": {
+    "hoc": 2394,
+    "kiem_tra": 597
+  },
+  "so_tin_da_loc": {
+    "hoc": 2033,
+    "kiem_tra": 564
+  },
+  "so_tin_hoc_trung_voi_tap_kiem_tra_da_bo": 28,
+  "ty_le_doan_dung": 0.9184397163120568,
+  "do_chinh_xac_khi_bao_tin_rac": 0.8085106382978723,
+  "ty_le_phat_hien_tin_rac": 0.8571428571428571,
+  "diem_f1_tin_rac": 0.8321167883211679,
+  "bang_ket_qua": [
+    [
+      404,
+      27
+    ],
+    [
+      19,
+      114
+    ]
+  ],
+  "cach_doc_bang": "Hàng là nhãn thật, cột là nhãn dự đoán; 0: tin thường, 1: tin rác.",
+  "pham_vi": "Bộ kiểm tra đã được dùng trong quá trình phát triển bản tiếng Việt; không phải kết quả kiểm định độc lập. Đã bỏ trùng nguyên văn sau chuẩn hóa; tin gần giống vẫn có thể còn. Dữ liệu thiên về SMS thông báo và rác/lừa đảo, chưa đại diện cho email dài hoặc hội thoại hằng ngày."
+}

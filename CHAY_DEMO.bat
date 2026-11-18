@@ -2,11 +2,11 @@
 chcp 65001 >nul
 cd /d "%~dp0"
 if not exist ".venv\Scripts\python.exe" (
-  echo Hay chay CAI_DAT.bat truoc.
+  echo Bạn chạy CAI_DAT.bat trước nhé.
   pause
   exit /b 1
 )
-if not exist "artifacts\spam_model.joblib" (
+if not exist "pkl\model_viet.pkl" (
   ".venv\Scripts\python.exe" train.py
   if errorlevel 1 goto failed
 )
@@ -14,6 +14,6 @@ if not exist "artifacts\spam_model.joblib" (
 if errorlevel 1 goto failed
 exit /b 0
 :failed
-echo Chua chay duoc. Xem thong bao loi phia tren.
+echo Chưa chạy được. Bạn xem thông báo phía trên nhé.
 pause
 exit /b 1

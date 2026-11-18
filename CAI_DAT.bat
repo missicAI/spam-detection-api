@@ -7,10 +7,10 @@ if not exist ".venv\Scripts\python.exe" (
 )
 ".venv\Scripts\python.exe" -m pip install -r requirements.txt
 if errorlevel 1 goto failed
-echo Da cai dat. Mo CHAY_DEMO.bat de chay giao dien.
+echo Đã cài xong. Bạn mở CHAY_DEMO.bat để chạy nhé.
 pause
 exit /b 0
 :failed
-echo Cai dat chua thanh cong. Kiem tra Python 3.12 va ket noi Internet.
+echo Chưa cài xong. Bạn kiểm tra Python 3.12 và kết nối mạng nhé.
 pause
 exit /b 1

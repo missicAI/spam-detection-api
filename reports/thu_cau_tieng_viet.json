@@ -1,0 +1,35 @@
+{
+  "luu_y": "Đây là các câu dùng thử tự soạn, không phải tập đánh giá độc lập. Giữ cả ví dụ sai để nhìn rõ giới hạn.",
+  "cac_cau": [
+    {
+      "vi_du": "Thông báo mã xác nhận",
+      "noi_dung": "Mã OTP đăng nhập của bạn là [NUMBER]. Không chia sẻ mã này với bất kỳ ai.",
+      "nhan_tham_khao_tu_soan": 0,
+      "du_doan": 0
+    },
+    {
+      "vi_du": "Báo trúng thưởng",
+      "noi_dung": "Chúc mừng bạn đã trúng thưởng một chiếc iPhone. Chuyển khoản phí nhận quà để nhận thưởng ngay.",
+      "nhan_tham_khao_tu_soan": 1,
+      "du_doan": 1
+    },
+    {
+      "vi_du": "Mời vay tiền",
+      "noi_dung": "Vay nhanh trong ngày, không cần thế chấp, lãi suất ưu đãi. Bấm vào đường dẫn để đăng ký nhận tiền.",
+      "nhan_tham_khao_tu_soan": 1,
+      "du_doan": 1
+    },
+    {
+      "vi_du": "Câu cảnh báo",
+      "noi_dung": "Đừng tin tin nhắn báo trúng thưởng, có thể là lừa đảo.",
+      "nhan_tham_khao_tu_soan": 0,
+      "du_doan": 0
+    },
+    {
+      "vi_du": "Trò chuyện ngắn",
+      "noi_dung": "Chiều nay mình gặp nhau ở quán cà phê nhé.",
+      "nhan_tham_khao_tu_soan": 0,
+      "du_doan": 1
+    }
+  ]
+}

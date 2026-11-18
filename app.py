@@ -1,47 +1,47 @@
-from pathlib import Path
-
-import joblib
+# Việt hóa và rút gọn app.py của DevWaqarAhmad; xem NGUON.md.
 import streamlit as st
-from pydantic import ValidationError
 
-from spamguard.service import PredictionRequest
+from du_doan import load_model, predict
 
-ROOT = Path(__file__).resolve().parent
-MODEL_PATH = ROOT / "artifacts/spam_model.joblib"
-st.set_page_config(page_title="SpamGuard · SMS Classifier", page_icon="✉️", layout="wide")
-st.title("✉️ SpamGuard — Phân loại tin nhắn")
-st.caption("TF-IDF + Logistic Regression · Dữ liệu SMS tiếng Anh · API riêng bằng FastAPI")
-if not MODEL_PATH.exists():
-    st.info("Chạy python train.py trong thư mục dự án trước khi mở bản demo.")
+st.set_page_config(page_title="SpamGuard — Kiểm tra tin nhắn", page_icon="✉️", layout="centered")
+st.title("✉️ Kiểm tra tin nhắn rác")
+st.write("Dán tin nhắn tiếng Việt vào bên dưới để kiểm tra. Bạn có thể thử một trong các ví dụ có sẵn.")
+
+examples = {
+    "Tự nhập": "",
+    "Thông báo mã xác nhận": "Mã OTP đăng nhập của bạn là [NUMBER]. Không chia sẻ mã này với bất kỳ ai.",
+    "Báo trúng thưởng": "Chúc mừng bạn đã trúng thưởng một chiếc iPhone. Chuyển khoản phí nhận quà để nhận thưởng ngay.",
+    "Mời vay tiền": "Vay nhanh trong ngày, không cần thế chấp, lãi suất ưu đãi. Bấm vào đường dẫn để đăng ký nhận tiền.",
+}
+choice = st.selectbox("Chọn ví dụ", list(examples))
+user_input = st.text_area(
+    "Nội dung tin nhắn",
+    examples[choice],
+    height=170,
+    placeholder="Nhập hoặc dán tin nhắn tiếng Việt ở đây…",
+    key=choice,
+)
+try:
+    load_model()
+except RuntimeError as exc:
+    st.info(str(exc))
     st.stop()
 
-
-@st.cache_resource
-def load_bundle(path, modified):
-    return joblib.load(path)
-
-
-bundle = load_bundle(str(MODEL_PATH), MODEL_PATH.stat().st_mtime_ns)
-sample = st.selectbox("Thử nhanh", ["Tin thường", "Tin quảng cáo", "Tự nhập"])
-defaults = {
-    "Tin thường": "Hi, are we still meeting for lunch tomorrow?",
-    "Tin quảng cáo": "Congratulations! You won a free prize. Call now to claim your cash reward!",
-    "Tự nhập": "",
-}
-text = st.text_area("Tin nhắn tiếng Anh", defaults[sample], key=sample, height=150)
-if st.button("Phân loại", type="primary"):
+if st.button("Kiểm tra tin nhắn", type="primary"):
     try:
-        payload = PredictionRequest(text=text)
-        model = bundle["pipeline"]
-        index = list(model.classes_).index("spam")
-        probability = float(model.predict_proba([payload.text])[0, index])
-        label = model.predict([payload.text])[0]
-        st.subheader("🚩 Spam" if label == "spam" else "✅ Tin nhắn thường")
-        st.metric("Xác suất spam do mô hình ước lượng", f"{probability:.1%}")
-        st.caption("Đây là điểm của mô hình chưa hiệu chỉnh xác suất; không đảm bảo độ tin cậy tương ứng.")
-    except ValidationError as exc:
+        prediction = predict(user_input)
+        if prediction == 1:
+            st.warning("Tin nhắn có dấu hiệu là tin rác. Bạn nên đọc kỹ nội dung và đường dẫn đi kèm.")
+        else:
+            st.success("Chưa phát hiện dấu hiệu tin rác trong nội dung này.")
+        st.caption(
+            "Kết quả có thể nhầm. Chương trình không xác minh người gửi hoặc độ an toàn của đường dẫn."
+        )
+    except (ValueError, RuntimeError) as exc:
         st.error(str(exc))
-metrics = bundle["metadata"]["metrics"]
-with st.expander("Kết quả trên tập kiểm tra"):
-    st.json(metrics)
-    st.caption(bundle["metadata"]["limitations"])
+
+with st.expander("Chương trình kiểm tra như thế nào?"):
+    st.write(
+        "Mô hình học từ các tin nhắn tiếng Việt đã có nhãn. Nó xem nội dung cả tin, thay vì chỉ dò một từ như ‘trúng thưởng’."
+    )
+    st.write("Bản đơn giản này vẫn có thể đoán sai, nhất là câu trò chuyện ngắn hoặc email dài.")
