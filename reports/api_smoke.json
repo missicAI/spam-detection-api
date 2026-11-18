@@ -1,0 +1,18 @@
+{
+  "health": {
+    "status": "ready",
+    "model_loaded": true
+  },
+  "predictions": [
+    {
+      "label": "ham",
+      "spam_probability": 0.1051550082648016,
+      "model_version": "2026-11-18T03:38:11.453694+00:00"
+    },
+    {
+      "label": "spam",
+      "spam_probability": 0.9835893760349763,
+      "model_version": "2026-11-18T03:38:11.453694+00:00"
+    }
+  ]
+}

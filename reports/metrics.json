@@ -1,0 +1,61 @@
+{
+  "created_at_utc": "2026-11-18T03:38:11.453694+00:00",
+  "dataset": "UCI SMS Spam Collection (English SMS)",
+  "dataset_sha256": "7d039a24a6083ed9ef0f806ebad56bbb976e3aeb8de05669173bfdc4996c239d",
+  "cleaning": {
+    "raw_rows": 5574,
+    "invalid_rows_removed": 0,
+    "conflicting_rows_removed": 0,
+    "duplicate_rows_removed": 415,
+    "clean_rows": 5159
+  },
+  "split": {
+    "train": 4127,
+    "test": 1032,
+    "test_fraction": 0.2,
+    "stratified": true,
+    "random_state": 42,
+    "overlapping_normalized_messages": 0
+  },
+  "test_class_counts": {
+    "ham": 904,
+    "spam": 128
+  },
+  "metrics": {
+    "accuracy": 0.9825581395348837,
+    "spam_precision": 0.9166666666666666,
+    "spam_recall": 0.9453125,
+    "spam_f1": 0.9307692307692308,
+    "roc_auc": 0.996612278761062
+  },
+  "baseline": {
+    "strategy": "always predict majority class",
+    "accuracy": 0.875968992248062,
+    "spam_f1": 0.0
+  },
+  "confusion_matrix": {
+    "labels": [
+      "ham",
+      "spam"
+    ],
+    "rows": "actual",
+    "columns": "predicted",
+    "values": [
+      [
+        893,
+        11
+      ],
+      [
+        7,
+        121
+      ]
+    ]
+  },
+  "versions": {
+    "python": "3.12.14",
+    "scikit_learn": "1.8.0",
+    "pandas": "2.2.3",
+    "numpy": "2.3.5"
+  },
+  "limitations": "Single random holdout from an old English SMS corpus; near-duplicates may remain. Not validated for Vietnamese, email, or current production traffic. Probabilities are not calibrated. No hyperparameter selection was performed on the test set."
+}
